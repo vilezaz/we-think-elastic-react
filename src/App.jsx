@@ -3,12 +3,18 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
 
   const refNav = useRef();
   const refAnchors = useRef([]);
   const refHello = useRef([]);
+  const refVideo = useRef();
+  
+  
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -26,17 +32,31 @@ const App = () => {
       stagger : 0.1
     });
 
-    tl.from(refHello.current, {
-      stagger: 0.15,
+    gsap.to(refVideo.current, {
+      width: "100%",
+      scrollTrigger: {
+        trigger: refVideo.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      }
+    });
+  });
+
+  useGSAP(() => {
+    gsap.from(refHello.current, {
+      stagger: 0.20,
       duration: 3,
       opacity: 0,
     });
-  });
+  }, []);
+
+  
 
   return (
     <div className="bg-[#151414] min-h-screen">
       <Navbar refNav={refNav} refAnchors={refAnchors}/>
-      <Hero  refHello={refHello}/>
+      <Hero  refHello={refHello} refVideo={refVideo}/>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import bgVideo from "../src/assets/Videos/video-start.mp4";
 
-const Hero = ({refHello}) => {
+const Hero = ({refHello, refVideo}) => {
 
   const SplitText = (text) => {
     return text.split("").map((char, index) => {
@@ -24,8 +24,10 @@ const Hero = ({refHello}) => {
         WE'RE THE TEAM <br /> THINK ELASTIC
       </p>
 
-      <div className="my-20">
-        <video src={bgVideo} loop autoPlay muted></video>
+      <div className="my-20 w-full mx-auto overflow-hidden">
+      <div className="w-[40%] mx-auto" ref={refVideo}>
+        <video src={bgVideo} loop autoPlay muted className="h-full w-full"></video>
+      </div>
       </div>
 
       <div className="text-[#E7CFB1] text-[15vw] leading-[0.9] tracking-tight font-semibold px-20">
