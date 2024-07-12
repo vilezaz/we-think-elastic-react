@@ -4,6 +4,7 @@ import Hero from "./Hero";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SidePhotos from "./SidePhotos";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ const App = () => {
   const refAnchors = useRef([]);
   const refHello = useRef([]);
   const refVideo = useRef();
+  const refTextH2 = useRef([]);
   
   
 
@@ -32,7 +34,7 @@ const App = () => {
       stagger : 0.1
     });
 
-    gsap.to(refVideo.current, {
+    tl.to(refVideo.current, {
       width: "100%",
       scrollTrigger: {
         trigger: refVideo.current,
@@ -41,6 +43,21 @@ const App = () => {
         scrub: true,
       }
     });
+
+    refTextH2.current.forEach((h2) => {
+      gsap.from(h2, {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: h2,
+          start: "top bottom-=100",
+          end: "bottom top+=100",
+          toggleActions: "play none none reverse",
+        }
+      });
+    });
+
   });
 
   useGSAP(() => {
@@ -56,7 +73,8 @@ const App = () => {
   return (
     <div className="bg-[#151414] min-h-screen">
       <Navbar refNav={refNav} refAnchors={refAnchors}/>
-      <Hero  refHello={refHello} refVideo={refVideo}/>
+      <Hero  refHello={refHello} refVideo={refVideo} refTextH2={refTextH2}/>
+      <SidePhotos />
     </div>
   );
 };
