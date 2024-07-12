@@ -5,6 +5,9 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SidePhotos from "./SidePhotos";
+import Expertises from "./Expertises";
+import FooterImages from "./FooterImages";
+import Footer from "./Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +18,7 @@ const App = () => {
   const refHello = useRef([]);
   const refVideo = useRef();
   const refTextH2 = useRef([]);
+  const refExpertises = useRef();
   
   
 
@@ -58,6 +62,19 @@ const App = () => {
       });
     });
 
+    gsap.to(refExpertises.current, {
+      x: "-100%",
+      scrollTrigger: {
+          trigger: refExpertises.current,
+          scroller: "body",
+          start: "top top",
+          end: "=+250%",
+          scrub: 1,
+          pin: true,
+          anticipatePin : 1,
+      }
+  });
+
   });
 
   useGSAP(() => {
@@ -75,6 +92,9 @@ const App = () => {
       <Navbar refNav={refNav} refAnchors={refAnchors}/>
       <Hero  refHello={refHello} refVideo={refVideo} refTextH2={refTextH2}/>
       <SidePhotos />
+      <Expertises refExpertises={refExpertises}/>
+      <FooterImages />
+      <Footer />
     </div>
   );
 };

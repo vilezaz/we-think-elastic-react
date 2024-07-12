@@ -54,7 +54,7 @@ const SidePhotos = () => {
     },
   ];
   return (
-    <div className="min-h-screen w-full flex justify-center flex-wrap py-20">
+    <div className="min-h-screen w-full flex justify-center flex-wrap pt-20">
       {data.map((item, index) => (
         <div
           key={index}
